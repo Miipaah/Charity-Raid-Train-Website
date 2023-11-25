@@ -1,0 +1,7 @@
+# Environment variables
+.env
+
+# Python byte-compiled files and directories
+__pycache__/
+*.py[cod]
+*$py.class
