@@ -6,10 +6,11 @@ from dotenv import load_dotenv
 import base64
 
 #Functions to get Tiltify Data
+load_dotenv()
 
 def authorize_tiltify():
 
-    load_dotenv()
+   
 
     
     token_url = 'https://v5api.tiltify.com/oauth/token'
