@@ -1,8 +1,17 @@
 from flask import Flask, jsonify
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 import threading
 import api
+import os
 
 app = Flask(__name__)
+limiter = Limiter(
+    get_remote_address,
+    app=app,
+    default_limits=["200 per day", "50 per hour"],
+    storage_uri="memory://",
+)
 
 # Shared data storage
 global_data_storage = {
@@ -59,26 +68,34 @@ def initialize_base_values():
         print(global_data_storage)
 
 # Webhook endpoints
-@app.route('/server/webhook/tiltify', methods=['POST'])
+@app.route('/server/webhook3ujp7MDBTgeatoX8JXlnoz2YJPVfL/tiltify', methods=['POST'])
+@limiter.limit("1 per  seconds")
 def tiltify_webhook():
     threading.Thread(target=update_tiltify_data).start()
     return 'Tiltify Webhook received', 200
 
-@app.route('/server/webhook/fourthwall', methods=['POST'])
+@app.route('/server/webhookgCULOhczsMgcWJR6ZkxexUp20r26F/fourthwall', methods=['POST'])
+@limiter.limit("1 per 3 seconds")
 def fourthwall_webhook():
     threading.Thread(target=update_fourthwall_data).start()
     return 'Fourthwall Webhook received', 200
 
-@app.route('/webhook/sheets', methods=['POST'])
+@app.route('/webhook/sheetsgCULOhczsMgcWJR6ZkxexUp20r26F', methods=['POST'])
+@limiter.limit("1 per 3 seconds")
 def sheets_webhook():
     threading.Thread(target=update_sheets_data).start()
     return 'Sheets Webhook received', 200
 
 # API endpoint to retrieve the stored data
 @app.route('/server/crt23-data', methods=['GET'])
+@limiter.limit("700 per 2 seconds")
 def get_data():
     return jsonify(global_data_storage), 200
 
 if __name__ == '__main__':
+    print(os.getpid())
     initialize_base_values()  # Call initialization function on startup
+    
     app.run(debug=True, port=5000)
+    print(os.getpid())
+    
