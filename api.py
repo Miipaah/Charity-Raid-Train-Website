@@ -10,7 +10,7 @@ load_dotenv()
 
 def authorize_tiltify():
 
-   
+    load_dotenv()
 
     
     token_url = 'https://v5api.tiltify.com/oauth/token'
@@ -94,8 +94,7 @@ def get_fourthwall():
 def authourize_sheets():
     pass
 
-def get_sheets():
-    pass
+
 
   
 

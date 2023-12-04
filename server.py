@@ -1,10 +1,11 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify,request
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 import threading
 import api
 import os
 from dotenv import load_dotenv
+import requests
 
 
 app = Flask(__name__)
@@ -41,9 +42,7 @@ def fetch_fourthwall_data():
     data = api.get_fourthwall()
     return data  # Removed the unnecessary set wrapping
 
-def fetch_sheets_data():
-    # Your logic to fetch and return data from Google Sheets API
-    return {}
+  
 
 # Update functions that use the API fetching functions
 def update_tiltify_data():
@@ -58,8 +57,8 @@ def update_fourthwall_data():
         global_data_storage["fourthwall"] = data
     print("Fourthwall Data Updated:", data)
 
-def update_sheets_data():
-    data = fetch_sheets_data()
+def update_sheets_data(data):
+    
     with lock:
         global_data_storage["sheets"] = data
     print("Sheets Data Updated:", data)
@@ -70,7 +69,7 @@ def initialize_base_values():
     if not initialized:
         update_tiltify_data()
         update_fourthwall_data()
-        update_sheets_data()
+        update_sheets_data(None)
         initialized = True
         print(global_data_storage)
 
@@ -87,15 +86,31 @@ def fourthwall_webhook():
     threading.Thread(target=update_fourthwall_data).start()
     return 'Fourthwall Webhook received', 200
 
-@app.route(Sheets_HOOK, methods=['POST'])
-@limiter.limit("1 per 3 seconds")
-def sheets_webhook():
-    threading.Thread(target=update_sheets_data).start()
-    return 'Sheets Webhook received', 200
+@app.route("/server/webhook/WJR6ZkxexUp/sheets", methods=['POST'])
+@limiter.limit("5 per 30 seconds")
+def webhook():
+    load_dotenv()
+    sig = os.getenv('SHEETS_SIGN')
+    data = request.json
+    if data['signature']== sig:
+        print(data['data'])
+        return jsonify(data['data'])
+    
+    return jsonify({"message": "Error Unauthorized"}), 401
 
 # API endpoint to retrieve the stored data
 @app.route('/server/crt23-data', methods=['GET'])
-@limiter.limit("30 per 1 seconds")
+@limiter.limit("15 per 1 seconds")
+def get_data():
+    return jsonify(global_data_storage), 200
+
+@app.route('/api/total-raised', methods=['GET'])
+@limiter.limit("15 per 1 seconds")
+def get_data():
+    return jsonify(global_data_storage), 200
+
+@app.route('/api/schedule', methods=['GET'])
+@limiter.limit("15 per 1 seconds")
 def get_data():
     return jsonify(global_data_storage), 200
 
