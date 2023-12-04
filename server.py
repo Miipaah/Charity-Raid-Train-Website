@@ -73,6 +73,10 @@ def initialize_base_values():
         initialized = True
         print(global_data_storage)
 
+@app.route('/')
+def hello():
+    return 'Hello, World!'
+
 # Webhook endpoints
 @app.route(Tiltify_HOOK, methods=['POST'])
 @limiter.limit("1 per  seconds")
@@ -106,18 +110,19 @@ def get_data():
 
 @app.route('/api/total-raised', methods=['GET'])
 @limiter.limit("15 per 1 seconds")
-def get_data():
-    return jsonify(global_data_storage), 200
+def get_total():
+    amount =  global_data_storage["fourthwall"]+ global_data_storage["tiltify"]
+    return jsonify(amount), 200
 
 @app.route('/api/schedule', methods=['GET'])
 @limiter.limit("15 per 1 seconds")
-def get_data():
-    return jsonify(global_data_storage), 200
+def get_schedule():
+    return jsonify(global_data_storage["sheets"]), 200
 
 if __name__ == '__main__':
-    print(os.getpid())
+
     initialize_base_values()  # Call initialization function on startup
     
-    app.run(debug=True, port=5000)
-    print(os.getpid())
+    app.run( port=5000)
+    
     
