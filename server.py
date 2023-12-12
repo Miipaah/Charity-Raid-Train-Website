@@ -6,9 +6,13 @@ import api
 import os
 from dotenv import load_dotenv
 import requests
+from flask_cors import CORS
+
+
 
 
 app = Flask(__name__)
+CORS(app)
 limiter = Limiter(
     get_remote_address,
     app=app,
@@ -25,9 +29,21 @@ Sheets_HOOK = os.getenv('GS_HOOK')
 global_data_storage = {
     "tiltify": None,
     "fourthwall": None,
-    "sheets": None
+    "sheets": [
+   {
+      "Streamer":"duckisaurus",
+      "Time":1702260000000,
+      "TILTIFY":"https://tiltify.com/@duckisaurus/last-stop-on-the-charity-raid-train",
+      "TWITCH":"www.twitch.tv/duckisaurus",
+      "TEST TIME":1701901192610
+   }
+]
 }
 
+def getraised():
+    print(int(global_data_storage["fourthwall"]))
+    amount =  global_data_storage["fourthwall"]+ global_data_storage["tiltify"]
+    return jsonify(amount), 200
 # Lock for thread-safe operations
 lock = threading.Lock()
 
@@ -64,14 +80,19 @@ def update_sheets_data(data):
     print("Sheets Data Updated:", data)
 
 # Function to run on server startup to initialize base values
+
 def initialize_base_values():
     global initialized
     if not initialized:
         update_tiltify_data()
         update_fourthwall_data()
-        update_sheets_data(None)
         initialized = True
         print(global_data_storage)
+initialize_base_values()
+
+@app.route('/api/')
+def hello():
+    return 'Hello, World!'
 
 @app.route('/')
 def hello():
@@ -79,40 +100,46 @@ def hello():
 
 # Webhook endpoints
 @app.route(Tiltify_HOOK, methods=['POST'])
-@limiter.limit("1 per  seconds")
+@limiter.limit("1 per 5 seconds")
 def tiltify_webhook():
     threading.Thread(target=update_tiltify_data).start()
     return 'Tiltify Webhook received', 200
 
 @app.route(Fourthwall_HOOK, methods=['POST'])
-@limiter.limit("1 per 3 seconds")
+@limiter.limit("1 per 5 seconds")
 def fourthwall_webhook():
     threading.Thread(target=update_fourthwall_data).start()
     return 'Fourthwall Webhook received', 200
 
-@app.route("/server/webhook/WJR6ZkxexUp/sheets", methods=['POST'])
+@app.route(Sheets_HOOK, methods=['POST'])
 @limiter.limit("5 per 30 seconds")
 def webhook():
     load_dotenv()
     sig = os.getenv('SHEETS_SIGN')
-    data = request.json
-    if data['signature']== sig:
-        print(data['data'])
-        return jsonify(data['data'])
+    incoming_data = request.json
+    if incoming_data['signature'] == sig:
+        print(incoming_data['data'])
+        # Start the thread and pass data to the function
+        threading.Thread(target=update_sheets_data, args=(incoming_data['data'],)).start()
+        return jsonify(incoming_data['data'])
     
     return jsonify({"message": "Error Unauthorized"}), 401
 
+
 # API endpoint to retrieve the stored data
-@app.route('/server/crt23-data', methods=['GET'])
+@app.route('/crt23-data', methods=['GET'])
 @limiter.limit("15 per 1 seconds")
 def get_data():
     return jsonify(global_data_storage), 200
 
-@app.route('/api/total-raised', methods=['GET'])
+@app.route('/total-raised', methods=['GET'])
 @limiter.limit("15 per 1 seconds")
 def get_total():
-    amount =  global_data_storage["fourthwall"]+ global_data_storage["tiltify"]
-    return jsonify(amount), 200
+    tiltify_amount = fetch_tiltify_data()
+    fourthwall_amount = fetch_fourthwall_data()
+    raised = round(fourthwall_amount + tiltify_amount, 2)
+    return jsonify(raised), 200
+
 
 @app.route('/api/schedule', methods=['GET'])
 @limiter.limit("15 per 1 seconds")
