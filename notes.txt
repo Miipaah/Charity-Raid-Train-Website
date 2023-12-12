@@ -1,0 +1,28 @@
+**__CRT 24' Tech Features__**
+
+**New Developments:**
+- Twitch Bot with Preset Commands
+- Discord Bot for Automating Check-in
+- Fourthwall Giveaway Workaround / Bot ?
+- Universal Alerts
+- Merch Advertisements / Panels -> Website Integration
+- Automatic Twitch Clip Collector 
+
+**Improvements:**
+- Schedule Feature on Website
+- Twitch embed Being restricted via an overlay element
+
+**Research Points**
+- Server Hosting (Twitch Bot, Discord Bot, Website)
+
+**Feedback / Features Requested**
+- More Integrated overlay with theme (Tiltify one boring)
+- Easy to add Tiltify Activity Feed
+- Top Donator Leaderboard Command (Idk about this one)
+- Option to hide chat or go vertical layout on Website
+
+
+__**CRT 23' Tech Notes**__
+- People Very Much liked the !Total command on day 3+4
+- Few people have reached out and said that they watched almost exclusively from Website this year
+-  Fourthwall Giveaway Hype Train was really Fun in last stream. (maybe make an actual Hype-Train overlay)
