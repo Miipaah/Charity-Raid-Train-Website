@@ -1,0 +1,278 @@
+body {
+    background-color: #2F3D7A;
+    margin: 0; 
+    padding: 0; 
+    background-image: url('https://media.discordapp.net/attachments/1176648624831217775/1180254557087993989/stardewbgonlysky.png?ex=657cc0b6&is=656a4bb6&hm=e7dc39bdb71e60f033d7a4131a41195926b18edd343549fc45bd4abd72341e7f&=&format=webp&quality=lossless&width=1570&height=884'); 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-size: cover;
+
+}
+#top-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+   margin: 0 auto;
+    padding-top: 20px; 
+    box-sizing: border-box; 
+    
+    
+}
+#donate-click {
+    background-color: transparent; /* Set the background color to transparent */
+    border: none; /* Remove the button border if needed */
+    padding: 0; /* Remove padding if needed */
+}
+
+
+#Donate-Top {
+    transition: filter 0.1s; /* Add a smooth transition effect for the filter property */
+}
+
+#donate-click:hover #Donate-Top{
+    filter: grayscale(70%) hue-rotate(0deg); /* Apply filter effects to change the image color on hover */
+}
+
+@media (max-width: 920px) {
+
+    #top-banner,#top-container {
+        width: 85%; /* Fit viewport width */
+        max-height: 120px;
+    }
+
+    .logo-container{
+        max-height: 100px;
+        position: absolute;
+        left: 51%;
+        transform: translate(-50%, -50%);
+    }
+
+
+    .logo-container img{
+        position: relative;
+        top: -90px;
+        scale: .5;
+    }
+
+    /* Hide or remove other elements */
+    .item-container,.donate-container,  #donate-logo,
+    #total-card /* Removed the comma here */
+    {
+        display: none;
+    }
+}
+#top-banner {
+    position: relative;
+    width: 100%; 
+    height: 224px; 
+    background-image: url('https://media.discordapp.net/attachments/585669570342158337/1181250313957679114/Website_Top_Panel.png?ex=65806015&is=656deb15&hm=b95ea8b3c9e7e5ad358c33087a196405c7cc47795ad548b6ca5cfe4be3ec66cf&=&format=webp&quality=lossless&width=1570&height=358'); 
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%; 
+}
+
+.item-container{
+    position: relative;
+    height: 224px;
+}
+#total-card{
+    top: 10px;
+    left: 20px;
+
+}
+#raised-title {
+    position: absolute;
+    top: 55px; /* Adjust the top position as needed */
+    left: 35px; /* Adjust the left position as needed */
+   
+    color: white; /* Set the text color */
+    font-size: 30px; /* Set the font size */
+    font-family: 'VT323', monospace;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Optional text shadow */
+}
+#total-card-text {
+    position: absolute;
+    top: 90px; /* Adjust the top position as needed */
+    right: 86%; /* Adjust the left position as needed */
+   
+    color: white; /* Set the text color */
+    font-size: 40px; /* Set the font size */
+    font-family: 'VT323', monospace;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Optional text shadow */
+}
+.item-container img {
+    width: auto;
+    height: 90%; 
+}
+.logo-container {
+    position: absolute;
+    top: 20%;
+    left: 51%;
+    transform: translate(-50%, -50%);
+    height: 100%;
+}
+.logo-container img{
+    width: auto;
+    height: 350px; 
+}
+.donate-container{
+    position: absolute;
+    height: 224px;
+    top: 70%;
+    left: 86%;
+    transform: translate(-50%, -50%);
+    height: 100%;
+}
+.donate-container img{
+    width: 200px;
+    height: auto; 
+}
+
+#donate-sprite{
+    position: absolute;
+    width: 125px;
+    height: auto; 
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Style the container div */
+#twitch-container {
+    display: flex;
+    justify-content: center; /* Align horizontally */
+    height: 100vh;
+    margin: 0; /* Remove any default margins */
+    padding: 0; /* Remove any default padding */
+}
+
+/* Style the embedded Twitch iframe */
+#twitch-embed {
+    width: 100%;
+    height: 100%; /* Set the height to fill the container */
+}
+#trackerGrid {
+    font-family: 'VT323', monospace;
+    display: grid;
+    width: 85%;
+    height: 50px;
+    max-width: 1000px;
+    grid-template-columns: 1fr .3fr 1fr; /* Creates 5 columns with equal width */
+    grid-gap: 0px; /* Optional: Adds space between columns */
+    margin: auto;
+    height: 50px;
+    overflow: hidden;
+    white-space: nowrap;
+    color: aliceblue;
+    font-size: min(4vw, 26px);
+    
+    
+}
+
+
+/* Styling for demonstration purposes */
+#tracker-dollar {
+
+    background-color: rgba(25, 62, 25, 0.533);
+    padding: 15px;
+    text-align: center;
+}
+#tracker-rate {
+
+    background-color:  rgba(25, 62, 25, 0.533);
+    padding: 15px;
+    text-align: right;
+}
+
+#tracker-spacer {
+    background-color:  rgba(25, 62, 25, 0.533);
+}
+
+#tracker-graph-current{
+    width: 100%;
+    height: 100%;
+    
+    background-image: url('https://cdn.discordapp.com/attachments/991510548741115904/1182370417508352170/crt_bar_filled.png?ex=65847342&is=6571fe42&hm=fbb139fff0bfc343c28f4bef3c30313253a3fc487d95466343385b58c90b1e8a&');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    clip-path: polygon(0% 0%, 99% 0%,99% 100%, 0% 100%);
+    background-color:  transparent;
+
+}
+#tracker-graph {
+    background-color:  rgba(25, 62, 25, 0.533);
+    background-image: url('https://cdn.discordapp.com/attachments/585669570342158337/1181625596141391982/crt_bar.png?ex=6581bd97&is=656f4897&hm=b2de3ab5571cac9b2ee5e7b187929d642ca795495aa2837c814bbbbb6de10bb3&');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    
+
+}
+
+#main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* This will center the children horizontally */
+    justify-content: space-between; /* Adjusts the spacing between the children */
+    height: 100%; /* Adjust the height as needed */
+  }
+
+  .Panels {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    font-family: 'VT323', monospace;
+    margin-top: 15px;
+  }
+  
+  .links {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px; /* Adjust the gap between buttons as needed */
+  }
+
+
+  
+  .panel-button {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between icon and text */
+    border: solid 5px; /* Removes default button border */
+    background-color: #c09e79;
+    border-color: #302424; /* Removes default button background */
+   
+    cursor: pointer;
+  }
+  
+  .panel-button span {
+    display: flex;
+    align-items: center;
+    font-family: 'VT323', monospace;
+  }
+  
+  .panel-button img {
+    width: 50px; /* Width of the icon */
+    height: 50px;
+    margin-top: 5px; /* Height of the icon */
+  }
+  
+  .panel-button h3 {
+    margin: 0;
+    font-size: 20px;
+    font-family: 'VT323', monospace;
+    color: #2b2a2a; /* Removes default margin from h3 */
+  }
+  
+  .panel-button:hover {
+    background-color: #f0f0f0; /* Change to your preferred hover background color */
+    color: #333; /* Change to your preferred text hover color */
+    transform: scale(1.05); /* Slightly increase the size of the button */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+    transition: all 0.3s ease; /* Smooth transition for the hover effects */
+  }
