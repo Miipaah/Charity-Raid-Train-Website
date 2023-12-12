@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRT Holiday 23'</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+    <div id="mobile-header"></div>
+    <div id="top-container">
+        <div id="top-banner">
+            <div class="item-container" id="total-card">
+                <img src="https://cdn.discordapp.com/attachments/1177068588172062780/1179663215366524978/Stickynote_Parchment_for_website.png?ex=657a99fb&is=656824fb&hm=3fa030c884e5846271116a62e2d13733ff39bc6fd7e1633d03b7ac85d58e0982&"
+                    alt="">
+                <div id="raised-title">USD RAISED:</div>
+                <div id="total-card-text">$10000.00</div>
+            </div>
+            <div class="logo-container" id="logo">
+                <img src="https://media.discordapp.net/attachments/1177093217225801809/1177136503189680148/CRT_hamburger_Style_v2.png?ex=657aa34c&is=65682e4c&hm=390a628632fefa3a77e8ccfe9b4cf1b63dd1b0cf37fc1a4b975594d40dc0a774&=&format=webp&quality=lossless&width=1570&height=786"
+                    alt="">
+            </div>
+            <div class="donate-container" id="donate-button">
+                <img id="donate-logo"
+                    src="
+                https://media.discordapp.net/attachments/1178156268809105428/1181090410131632159/powerupformentalhealth_logobanner.png?ex=657fcb29&is=656d5629&hm=c4e4e38c70e8bdda663c9bc5ff3b3112bd9f93fa67722f16509afc788c9d60f2&=&format=webp&quality=lossless&width=1358&height=562"
+                    alt="">
+                <div>
+                    <button id="donate-click" onclick="goToDonate()">
+                        <img src="https://cdn.discordapp.com/attachments/1121710272692879491/1181427359568633906/Dontate_Button_Blue_Unpressed.png?ex=658104f8&is=656e8ff8&hm=88eea7cacbc2efc274f3a3d2d132e331a46b829eef23d76960aa7382223b5635&"
+                            alt="Donate" id="Donate-Top">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="main-content">
+        <div id="trackerGrid">
+            <div id="tracker-dollar">USD $263.36 / $10,000</div>
+            <div id="tracker-rate">002.63%</div>
+
+            <div id="tracker-graph">
+                <div id="tracker-graph-current"></div>
+            </div>
+            <div id="space"></div>
+        </div>
+        <div id="twitch-embed">
+        </div>
+
+        <script src="https://embed.twitch.tv/embed/v1.js"></script>
+        <script src="embed.js"></script>
+
+
+    </div>
+    <!-- JavaScript -->
+    <script>
+        function fetchDataAndRefresh() {
+            fetch('https://charityraidtrain.com/api/total-raised') // Replace with the actual API endpoint URL
+                .then(response => response.json())
+                .then(data => {
+                    // Update the DOM elements with the new data
+
+                    raised = data.toFixed(2)
+                    document.getElementById('tracker-dollar').textContent = `USD $${raised} / $10,000`;
+
+                    const tracker_current = document.getElementById("tracker-graph-current");
+
+
+                    percent = ((data / 10000) * 100).toFixed(2);
+
+
+                    roundedPercent = Math.floor(percent);
+
+
+                    if (roundedPercent) {
+                        if (roundedPercent <= 20) {
+                            var range = 18 - 11;
+                            var progress = ((range * (roundedPercent - 10) / 10) + 10);
+                            tracker_current.style.clipPath = `polygon(0% 0%, ${progress}% 0%, ${progress}% 100%, 0% 100%)`;
+
+                        } else if (percent <= 30) {
+                            var range = 26 - 20;
+                            var progress = ((range * (roundedPercent - 20) / 10) + 20);
+                            tracker_current.style.clipPath = `polygon(0% 0%, ${progress}% 0%, ${progress}% 100%, 0% 100%)`;
+
+                        } else if (roundedPercent <= 40) {
+                            var range = 34 - 28;
+                            var progress = ((range * (roundedPercent - 30) / 10) + 28);
+                            tracker_current.style.clipPath = `polygon(0% 0%, ${progress}% 0%, ${progress}% 100%, 0% 100%)`;
+
+                        } else if (roundedPercent <= 50) {
+                            var range = 49 - 38;
+                            var progress = ((range * (roundedPercent - 40) / 10) + 38);
+                            tracker_current.style.clipPath = `polygon(0% 0%, ${progress}% 0%, ${progress}% 100%, 0% 100%)`;
+
+                        } else if (roundedPercent <= 60) {
+                            var range = 58 - 53;
+                            var progress = ((range * (percent - 50) / 10) + 52);
+                            tracker_current.style.clipPath = `polygon(0% 0%, ${progress}% 0%, ${progress}% 100%, 0% 100%)`;
+
+                        } else if (roundedPercent <= 70) {
+                            var range = 67 - 61;
+                            var progress = ((range * (roundedPercent - 60) / 10) + 60);
+                            tracker_current.style.clipPath = `polygon(0% 0%, ${progress}% 0%, ${progress}% 100%, 0% 100%)`;
+
+
+                        } else if (roundedPercent <= 80) {
+                            var range = 76 - 70;
+                            var progress = ((range * (roundedPercent - 70) / 10) + 69);
+                            tracker_current.style.clipPath = `polygon(0% 0%, ${progress}% 0%, ${progress}% 100%, 0% 100%)`;
+
+                        } else if (roundedPercent <= 90) {
+                            var range = 84 - 78;
+                            var progress = ((range * (percent - 80) / 10) + 77);
+                            tracker_current.style.clipPath = `polygon(0% 0%, ${progress}% 0%, ${progress}% 100%, 0% 100%)`;
+
+
+                        } else if (roundedPercent <= 100) {
+                            var range = 95 - 87;
+                            console.log(roundedPercent)
+                            var progress = ((range * (roundedPercent - 90) / 10) + 88);
+                            console.log(progress)
+                            tracker_current.style.clipPath = `polygon(0% 0%, ${progress}% 0%, ${progress}% 100%, 0% 100%)`;
+
+                        } else {
+                            var progress = 100;
+                            tracker_current.style.clipPath = `polygon(0% 0%, ${progress}% 0%, ${progress}% 100%, 0% 100%)`;
+                        }
+                    }
+
+
+                    document.getElementById('tracker-rate').textContent = `${percent}%`;
+
+                    document.getElementById('total-card-text').textContent = `$${raised}`;
+
+
+                    // You can update other elements or perform additional actions here
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                });
+        }
+
+        // Call the fetchDataAndRefresh function initially
+        fetchDataAndRefresh();
+
+        // Set up polling to refresh data every X milliseconds (e.g., every 5 seconds)
+        const pollingInterval = 5000; // 5 seconds
+        setInterval(fetchDataAndRefresh, pollingInterval);
+    </script>
+
+    <div class="Panels">
+        <div class="links">
+
+            <button class="panel-button" onclick="goToDonate()">
+                <span><img
+                        src="https://media.discordapp.net/attachments/1176648624831217775/1177749819880636467/image.png?ex=6573a3fe&is=65612efe&hm=d1b88d61037b647e1dbeb15f9c5e05a8f9781ba05f83c4e2a1482b6ff233a844&=&format=webp&quality=lossless&width=280&height=260"
+                        alt="Icon 2"></span>
+                <h3>DONATE</h3>
+            </button>
+
+            <button class="panel-button" onclick="goToMerch()">
+                <span><img
+                        src="https://cdn.discordapp.com/attachments/1176648624831217775/1177749539218792458/image.png?ex=6573a3bb&is=65612ebb&hm=78389f063acd1657282f7e7546ae3b13ff50483491e76331a1f4aa1f0d66e3de&"
+                        alt="Icon 4"></span>
+                <h3>MERCH SITE</h3>
+            </button>
+
+            <button class="panel-button" onclick="goToSchedule()">
+                <span><img
+                        src="https://media.discordapp.net/attachments/1176648624831217775/1177749539541762148/image.png?ex=6573a3bb&is=65612ebb&hm=46ff9f91281c28237902ffd8b6b9fdb5113e657aa1f57d14bc5040dcc8b3658b&=&format=webp&quality=lossless&width=280&height=260"
+                        alt="Icon 5"></span>
+                <h3>SCHEDULE</h3>
+            </button>
+
+            <button class="panel-button" onclick="goToHope()">
+                <span><img
+                        src="https://media.discordapp.net/attachments/1176648624831217775/1177749540359647362/image.png?ex=6573a3bb&is=65612ebb&hm=9465b643ffe1a2920423d2bac3feb1570e1fe900314abe69be4ab4e0f266b9f1&=&format=webp&quality=lossless&width=280&height=260"
+                        alt="Icon 3"></span>
+                <h3>Project Hope</h3>
+            </button>
+
+            <button class="panel-button" onclick="goToMerch()">
+                <span><img
+                        src="https://cdn.discordapp.com/attachments/1176648624831217775/1177749539218792458/image.png?ex=6573a3bb&is=65612ebb&hm=78389f063acd1657282f7e7546ae3b13ff50483491e76331a1f4aa1f0d66e3de&"
+                        alt="Icon 4"></span>
+                <h3>MERCH SITE</h3>
+            </button>
+
+            <button class="panel-button" onclick="goToStreamer()">
+                <span><img
+                        src="https://media.discordapp.net/attachments/1176648624831217775/1177749538677735555/image.png?ex=6573a3bb&is=65612ebb&hm=1a0ab65d22c1da5e45d7e702eb3493e2b75eb1bbdbf4adca3657b70f673ea29a&=&format=webp&quality=lossless&width=280&height=260"
+                        alt="Icon 1"></span>
+                <h3>LIVE</h3>
+            </button>
+
+            <button class="panel-button" onclick="goToTwitter()">
+                <span><img
+                        src="https://media.discordapp.net/attachments/1176648624831217775/1177749540137353306/image.png?ex=6573a3bb&is=65612ebb&hm=c23bd03260fe07fb18ea8c8b050e823d36839e17085fe6d4a796bfe77be946dc&=&format=webp&quality=lossless&width=280&height=260"
+                        Icon 5"></span>
+                <h3>TWITTER</h3>
+            </button>
+
+            <button class="panel-button" onclick="goToYoutube()">
+                <span><img
+                        src="https://media.discordapp.net/attachments/1176648624831217775/1177749539789217922/image.png?ex=6573a3bb&is=65612ebb&hm=d40033ff14270ebbd05c87441120dc3033b8dd238b5470270fa6489193154cc6&=&format=webp&quality=lossless&width=280&height=260"
+                        Icon 5"></span>
+                <h3>YOUTUBE</h3>
+            </button>
+
+
+        </div>
+    </div>
+
+    <script>
+        function goToStreamer() {
+            // Assuming current_tiltify holds the URL to the donation page
+            if (current_twitch) {
+                window.open(window.window.current_twitch, "_blank");
+            } else {
+                console.error('ERROR LINK BROKEN AAAAAAAAAA');
+            }
+        }
+
+        function goToDonate() {
+            // Assuming current_tiltify holds the URL to the donation page
+            if (current_tiltify) {
+                window.open(window.current_tiltify, "_blank");
+            } else {
+                console.error('No current donation page information available.');
+            }
+        }
+
+        function goToHope() {
+            window.open("https://www.projecthope.org/protecting-mental-health/", "_blank");
+        }
+
+        function goToMerch() {
+            window.open("http://charityraidtrain-shop.fourthwall.com/");
+        }
+
+        function goToTwitter() {
+            window.open("http://twitter.com/CharityRaid", "_blank");
+        }
+
+        function goToYoutube() {
+            window.open("http://www.youtube.com/@CharityRaidTrain", "_blank");
+        }
+
+        function goToSchedule() {
+            window.open("https://x.com/CharityRaid/status/1728578504936350102?s=20", "_blank");
+        }
+    </script>
+</body>
+
+</html>
